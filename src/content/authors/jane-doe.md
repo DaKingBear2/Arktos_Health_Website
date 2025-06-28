@@ -1,11 +1,11 @@
 ---
-title: Jane Doe
-email: janedoe@email.com
+title: Teddy Botana
+email: TeddyBotana002@gmail.com
 image: "@assets/profile/jane-doe.jpg"
 social:
   github: "https://github.com/"
   linkedIn: "https://www.linkedin.com/"
-  email: "janedoe@janedoe.com"
+  email: "TeddyBotana002@gmail.com"
 ---
 
-lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr navigation et dolore magna aliqua.
+Licensed Marriage and Family Therapist

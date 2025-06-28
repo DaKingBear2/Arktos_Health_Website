@@ -1,4 +1,4 @@
 ---
 title: Poetry
-description: Jane's poems
+description: Teddy's Poems
 ---

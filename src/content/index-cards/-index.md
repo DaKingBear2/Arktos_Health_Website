@@ -1,6 +1,6 @@
 ---
-title: Index Cards
-description: An example of content in an index card format.
+title: Did You Know?
+description: Index card content
 
 cards:
  - The 1st card

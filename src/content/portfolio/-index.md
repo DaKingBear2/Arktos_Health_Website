@@ -1,6 +1,6 @@
 ---
 title: Portfolio
-description: Jane Doe's projects and programs.
+description: Teddy Botana's projects and programs.
 
 projects:
   - title: "Conway's Game of Life"

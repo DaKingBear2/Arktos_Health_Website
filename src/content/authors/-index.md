@@ -1,4 +1,4 @@
 ---
-title: Authors
-description: this is meta description
+title: Clinicians
+description: Providers in your area.
 ---

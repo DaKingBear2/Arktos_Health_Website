@@ -1,8 +1,8 @@
 ---
-title: Hey, I'm Jane Doe!
+title: Hey, I'm Teddy Botana!
 description: this is meta description
 image: "@assets/profile/jane-doe.jpg"
 draft: false
 ---
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis illum nesciunt commodi vel nisi ut alias excepturi ipsum, totam, labore tempora, odit ex iste tempore sed. Fugit voluptatibus perspiciatis assumenda nulla ad nihil, omnis vel, doloremque sit quam autem optio maiores, illum eius facilis et quo consectetur provident dolor similique! Enim voluptatem dicta expedita veritatis repellat dolorum impedit, provident quasi at.
+I started Arktos Health with the hopes of creating something that can make a difference. It was a simple goal, but it has helped spur on something that I think will change the game. In short, I will make our mission to provide both quality service and unique changes to the mental health field which will create lasting change for everyone involved. I'll keep it short and not bore you so instead I invite you to take a look around our website. From free resources to the impact Arktos Health is making in your neighborhood, we pride ourselves oin putting our client's needs first and posting our knowledge openly for public consumption.
