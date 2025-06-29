@@ -1,5 +1,5 @@
 ---
 title: Documentation
-description: This is the docs
+description: These are useful resources available to all!
 draft: false
 ---

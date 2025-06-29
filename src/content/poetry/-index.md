@@ -1,4 +1,4 @@
 ---
 title: Poetry
-description: Teddy's Poems
+description: Arktos Health Poems
 ---
