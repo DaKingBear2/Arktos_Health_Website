@@ -1,7 +1,7 @@
 ---
 title: Hey, I'm Teddy Botana!
-description: this is meta description
-image: "@assets/profile/jane-doe.jpg"
+description: Licensed Marriage and Family Therapist
+image: "@assets/profile/Teddy-Botana-Pic.jpg"
 draft: false
 ---
 
