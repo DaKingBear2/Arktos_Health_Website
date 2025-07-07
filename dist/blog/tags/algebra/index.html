@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="en"> <head><!-- favicon --><link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"><link rel="sitemap" href="/sitemap-index.xml"><meta name="theme-name" content="pages"><meta name="msapplication-TileColor" content="#000000"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000"><meta name="generator" content="Astro v5.7.2"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"><title>
+      Algebra
+
+    </title><meta name="description" content="Arktos Health is a mental health private practice.
+"><meta name="author" content="Arktos Health LLC"><meta property="og:title" content="Algebra
+"><meta property="og:description" content="Arktos Health is a mental health private practice.
+"><meta property="og:type" content="website"><meta property="og:url" content="https://Arktoshealth.com/blog/tags/algebra/"><meta property="og:image" content="https://Arktoshealth.com@assets/og-image.png"><meta name="twitter:title" content="Algebra
+"><meta name="twitter:description" content="Arktos Health is a mental health private practice.
+"><meta name="twitter:image" content="https://Arktoshealth.com@assets/og-image.png"><meta name="twitter:card" content="summary_large_image"><!-- Katex --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css" integrity="sha384-zh0CIslj+VczCZtlzBcjt5ppRcsAmDnRem7ESsYwWwg3m/OaJ2l4x7YBZl9Kxxib" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js" integrity="sha384-Rma6DA2IPUwhNxmrB/7S3Tno0YY7sFu9WSYMCuulLhIqYSGZ2gKCJWIqhBWqMQfh" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><!-- https://docs.astro.build/en/guides/view-transitions --><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="swap"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.B4c5SJya.js"></script><script type="application/json" data-tooltips-options>{"interactive":false,"delay":[333,0]}</script><script type="module" src="/_astro/Tooltips.astro_astro_type_script_index_0_lang.Bx2cGmPu.js"></script><link rel="stylesheet" href="/_astro/about.BagEa4Wf.css">
+<link rel="stylesheet" href="/_astro/about.DBGFvz73.css"><script type="module" src="/_astro/page.DlXkxCA4.js"></script></head> <body> <!-- ---
+// Twinkling Star Background 
+const numStars = 1600;
+const stars = Array.from({ length: numStars }).map(() => ({
+  left: `${Math.random() * 100}%`,
+  top: `${Math.random() * 100}%`,
+  size: `${Math.random() * 2 + 1}px`,
+  delay: `${7 * Math.random()}s`,
+  // hsl: `hsl(${Math.random() * 360}, 100%, 50%)`, // background: ${hsl}; 
+}));
+---
+<div
+  class="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden"
+>
+  {
+    stars.map(({ left, top, size, delay }) => (
+      <div
+        class="absolute bg-none dark:bg-yellow-50 rounded-full animate-twinkle"
+        style={`
+            left: ${left};
+            top: ${top};
+            width: ${size};
+            height: ${size};
+            animation-delay: ${delay};
+        `}
+      />
+    ))
+  }
+</div> --><!-- Gradient Cycle Background --><!-- <div
+  class="gradient animate-cycleBg fixed top-0 left-0 w-full h-full -z-1 pointer-events-none overflow-hidden"
+/>
+<style>
+  .gradient {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+  }
+</style> --><!-- Single Image Background --><!-- <style>
+  html::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/src/assets/backgrounds/bwca-dusk.png) no-repeat center center;
+    background-size: cover;
+    z-index: -1;
+    pointer-events: none;
+  }
+</style> --><!-- Dual Image Background --> <header class="container glass py-2 z-30 mb-4 lg:mt-4 lg:rounded-lg sticky top-0" data-astro-transition-persist="astro-zg46k4mb-1"> <nav class="relative flex flex-wrap items-center justify-between"> <!-- navbar toggler --> <input id="nav-toggle" type="checkbox" class="hidden"> <label for="nav-toggle" class="order-0 cursor-pointer flex items-center md:hidden text-txt-p dark:text-darkmode-txt-p lg:order-1"> <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20"> <title>Menu Open</title> <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path> </svg> <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20"> <title>Menu Close</title> <polygon points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2" transform="rotate(45 10 10)"></polygon> </svg> </label> <!-- /navbar toggler --> <ul id="nav-menu" class="text-center lg:text-left order-3 hidden w-full pb-6 md:order-1 md:flex md:w-auto md:space-x-2 md:pb-0 lg:space-x-4"> <li class=""> <a href="/" class="block p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 false"> Home </a> </li><li class=""> <a href="/about" class="block p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 false"> About </a> </li><li class=""> <a href="/docs" class="block p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 false"> Docs </a> </li><li class=""> <a href="/blog" class="block p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 false"> Blog </a> </li><li class=""> <a href="/recipes" class="block p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 false"> Recipes </a> </li><li class=""> <a href="/poetry" class="block p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 false"> Poetry </a> </li><li class=""> <a href="/index-cards" class="block p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 false"> Index Cards </a> </li><li class=""> <a href="/authors" class="block p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 false"> Authors </a> </li><li class=""> <a href="/portfolio" class="block p-2 font-secondary font-semibold text-txt-p transition dark:text-darkmode-txt-p lg:px-2 lg:py-3 false"> Portfolio </a> </li> </ul> <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0"> <a class="mr-4 inline-block border-border text-xl text-txt-p dark:border-darkmode-border dark:text-darkmode-txt-p" href="/search" aria-label="search"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M456.69 421.39 362.6 327.3a173.81 173.81 0 0 0 34.84-104.58C397.44 126.38 319.06 48 222.72 48S48 126.38 48 222.72s78.38 174.72 174.72 174.72A173.81 173.81 0 0 0 327.3 362.6l94.09 94.09a25 25 0 0 0 35.3-35.3zM97.92 222.72a124.8 124.8 0 1 1 124.8 124.8 124.95 124.95 0 0 1-124.8-124.8z"></path></svg> </a> <div class="inline-flex a mr-2"> <input class="absolute opacity-0" id="theme-switcher" data-theme-switcher type="checkbox"> <label class="relative inline-block h-4 w-6 cursor-pointer" for="theme-switcher"> <span class="sr-only">theme switcher</span> <span class="absolute -top-1 left-0 flex h-6 w-6 items-center justify-center rounded-full"> <svg class="absolute z-10 opacity-100 dark:opacity-0" viewBox="0 0 24 24" height="21" width="21"> <path fill="#000" d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z"></path> </svg> <svg class="absolute z-10 opacity-0 dark:opacity-100" viewBox="0 0 24 24" height="21" width="21"> <path fill="#fff" d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z"></path> </svg> </span> </label> </div> <script data-astro-rerun>
+  const defaultTheme = "system";
+
+  function getTheme(defaultTheme) {
+    var darkMode = defaultTheme === "dark" ? true : false;
+    if (localStorage.getItem("theme") === "system") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        darkMode = true;
+      }
+    } else if (localStorage.getItem("theme") === "dark") {
+      darkMode = true;
+    } else if (localStorage.getItem("theme") === "light") {
+      darkMode = false;
+    }
+    return darkMode;
+  }
+
+  function setTheme(darkMode) {
+    // Update DOM
+    darkMode
+      ? document.documentElement.classList.add("dark")
+      : document.documentElement.classList.remove("dark");
+    // Update localStorage
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+  }
+
+  // This prevents flickering back to default theme before the page is fully loaded
+  setTheme(getTheme(defaultTheme));
+
+  document.addEventListener("astro:page-load", () => {
+    setTheme(getTheme(defaultTheme));
+    // Theme switcher
+    var themeSwitch = document.querySelectorAll("[data-theme-switcher]");
+    themeSwitch.forEach((el) => {
+      el.addEventListener("change", (e) => {
+        setTheme(e.target.checked);
+      });
+    });
+  });
+</script> </div> </nav> </header> <main id="main-content" class="flex-1">  <section class="flex justify-center"> <div class="container text-center m-2"> <div class="rounded-lg p-0 bg-gradient-to-t gradient"> <div class="rounded-lg glass px-8 py-6 intersect:animate-fadeDown opacity-0 intersect-no-queue"> <h1>Algebra</h1> <nav aria-label="Breadcrumb" class="mt-4"> <ol class="inline-flex" role="list"> <li class="mx-1 capitalize" role="listitem">  <a class="text-txt-p dark:text-darkmode-txt-p" href="/"> Home </a> </li><li class="mx-1 capitalize" role="listitem"> <span class="inlin-block mr-1">/</span> <a class="text-txt-p dark:text-darkmode-txt-p" href="/blog"> blog </a> </li><li class="mx-1 capitalize" role="listitem"> <span class="inlin-block mr-1">/</span> <a class="text-txt-p dark:text-darkmode-txt-p" href="/blog/tags"> tags </a> </li><li class="mx-1 capitalize" role="listitem"> <span class="inlin-block mr-1">/</span> <span class="text-txt-light dark:text-darkmode-txt-light">algebra</span> </li> </ol> </nav> </div> </div> </div> </section> <section class="section-sm"> <div class="pb-0"> <div class="container"> <div class="row"> <div class="py-2 md:py-4 md:col-6"> <div class="h-full m-2 pl-0 bg-gradient-to-br gradient rounded-lg"> <div class="glass h-full rounded-lg p-4 intersect:animate-fadeUp opacity-0"> <h4 class="mb-2"> <a href="/blog/emmy-noether"> Emmy Noether - Mother of Modern Algebra </a> </h4> <ul class="mb-2"> <li class="mr-0 inline-block"> <a href="/blog/categories/mathematics"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="ml-2 -mt-1 inline-block" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M464 128H272l-54.63-54.63c-6-6-14.14-9.37-22.63-9.37H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V176c0-26.51-21.49-48-48-48zm0 272H48V112h140.12l54.63 54.63c6 6 14.14 9.37 22.63 9.37H464v224z"></path></svg> Mathematics </a> </li> <!-- { tags && (
+        <li class="mr-0 inline-block">
+          {
+            tags.map((tag: string, index: number) => (
+              <a href={`/blog/tags/${slugify(tag)}`}>
+                <FaHashtag className={"ml-2 -mt-1 inline-block"} />
+                {lowerHumanize(tag)}
+              </a>
+            ))
+          }
+        </li>
+      )} --> <li class="mr-0 inline-block"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" class="ml-2 -mt-1 inline-block" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"></path></svg> November 25, 2024 </li> <li class="mr-0 inline-block"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="ml-2 -mt-1 inline-block" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path></svg> 3 mins </li> </ul> <p class=""> Discover the life and legacy of Emmy Noether, a pioneer in abstract algebra and theoretical physics. </p> </div> </div> </div> </div> </div> </div> </section>  </main> <footer class="glass container lg:my-4 lg:rounded-lg intersect:animate-fadeUp opacity-0"> <div class="row py-2 lg:py-0 items-center flex-wrap-reverse"> <div class="text-center lg:col-6 lg:mb-0 lg:text-left"> <ul> <li class="m-2 inline-block"> <a href="/terms">&copy; Arktos Health LLC 2025</a> </li> </ul> </div> <div class="text-center lg:col-6 lg:my-0 flex items-center justify-center lg:justify-end"> <ul class="py-2 flex items-center"><li class="inline-block px-1 intersect:animate-fade opacity-0"><a class="glass-t rounded text-txt-p dark:text-darkmode-txt-p flex h-9 w-9 items-center justify-center text-center" aria-label="Facebook" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer nofollow"><span class="sr-only">Facebook</span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="w-6 h-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"></path></svg></a></li><li class="inline-block px-1 intersect:animate-fade opacity-0"><a class="glass-t rounded text-txt-p dark:text-darkmode-txt-p flex h-9 w-9 items-center justify-center text-center" aria-label="GitHub" href="https://www.github.com/" target="_blank" rel="noopener noreferrer nofollow"><span class="sr-only">GitHub</span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" class="w-6 h-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></a></li><li class="inline-block px-1 intersect:animate-fade opacity-0"><a class="glass-t rounded text-txt-p dark:text-darkmode-txt-p flex h-9 w-9 items-center justify-center text-center" aria-label="Instagram" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer nofollow"><span class="sr-only">Instagram</span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" class="w-6 h-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg></a></li><li class="inline-block px-1 intersect:animate-fade opacity-0"><a class="glass-t rounded text-txt-p dark:text-darkmode-txt-p flex h-9 w-9 items-center justify-center text-center" aria-label="LinkedIn" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer nofollow"><span class="sr-only">LinkedIn</span><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" class="w-6 h-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg></a></li></ul> </div> </div> </footer> <!-- <ObserverScript /> --> </body></html>
