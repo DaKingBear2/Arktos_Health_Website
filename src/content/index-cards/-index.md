@@ -1,6 +1,6 @@
 ---
-title: Did You Know?
-description: Index card content
+title: Fun Facts
+description: Interesting facts and insights about mental health and wellness.
 
 cards:
  - The 1st card

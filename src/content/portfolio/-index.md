@@ -1,5 +1,5 @@
 ---
-title: Portfolio
+title: Projects
 description: Teddy Botana's projects and programs.
 
 projects:

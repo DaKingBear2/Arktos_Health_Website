@@ -12,11 +12,22 @@ let parts = [
   },
 ];
 
+// Map old URLs to new page names
+const pageNameMap: Record<string, string> = {
+  "authors": "Clinicians",
+  "docs": "Game Room",
+  "recipes": "Resources",
+  "poetry": "Postcards",
+  "index-cards": "Fun Facts",
+  "portfolio": "Projects",
+  "contact": "Contact Us",
+};
+
 paths.forEach((label: string, i: number) => {
   const href = `/${paths.slice(0, i + 1).join("/")}`;
   label !== "page" &&
     parts.push({
-      label: lowerHumanize(label.replace(/[-_]/g, " ")) || "",
+      label: pageNameMap[label] || lowerHumanize(label.replace(/[-_]/g, " ")) || "",
       href,
       "aria-label": Astro.url.pathname === href ? "page" : undefined,
     });

@@ -1,4 +1,4 @@
 ---
-title: Recipes
-description: A modest recipe book.
+title: Resources
+description: Helpful resources and tools for mental health and wellness.
 ---

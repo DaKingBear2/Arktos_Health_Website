@@ -13,6 +13,7 @@ import {
   FaGlobe,
   FaYoutube,
 } from "react-icons/fa";
+import { SiBluesky } from "react-icons/si";
 
 interface Props {
   links?: SocialLinks;
@@ -165,6 +166,20 @@ const iconClass =
           >
             <span class="sr-only">YouTube</span>
             <FaYoutube className="w-6 h-6" />
+          </a>
+        </li>
+      )}
+      {links.bluesky && (
+        <li class={liClass}>
+          <a
+            class={iconClass}
+            aria-label="Bluesky"
+            href={links.bluesky}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+          >
+            <span class="sr-only">Bluesky</span>
+            <SiBluesky className="w-6 h-6" />
           </a>
         </li>
       )}

@@ -1,5 +1,5 @@
 ---
-title: Documentation
-description: These are useful resources available to all!
+title: Game Room
+description: Interactive tools and resources for your mental health journey.
 draft: false
 ---

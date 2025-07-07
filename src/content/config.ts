@@ -22,6 +22,7 @@ const social = z.object({
   tiktok: z.string().optional(),
   website: z.string().optional(),
   youtube: z.string().optional(),
+  bluesky: z.string().optional(),
 });
 
 const about = defineCollection({
