@@ -62,6 +62,7 @@
     "sass": "^1.64.2",
     "tailwind-bootstrap-grid": "^5.0.1",
     "tailwindcss": "^3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "wrangler": "^4.24.0"
   }
 }
