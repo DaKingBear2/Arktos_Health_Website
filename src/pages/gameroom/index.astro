@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 import CollectionLayout from "@components/docs/CollectionLayout.astro";
 import { getIndex, getGroups } from "@lib/contentParser";
@@ -9,3 +10,16 @@ const groupIndices = (await getGroups("docs", sortByTitle)) as DocsEntry[];
 ---
 
 <CollectionLayout entries={groupIndices} collectionIndex={collectionIndex} />
+=======
+---
+import CollectionLayout from "@components/docs/CollectionLayout.astro";
+import { getIndex, getGroups } from "@lib/contentParser";
+import type { DocsEntry } from "@/types";
+import { sortByTitle } from "@lib/sortFunctions";
+
+const collectionIndex = (await getIndex("docs")) as DocsEntry;
+const groupIndices = (await getGroups("docs", sortByTitle)) as DocsEntry[];
+---
+
+<CollectionLayout entries={groupIndices} collectionIndex={collectionIndex} />
+>>>>>>> new-branch

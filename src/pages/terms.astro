@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 import EntryLayout from "@components/terms/EntryLayout.astro";
 import { getIndex } from "@lib/contentParser";
@@ -7,3 +8,14 @@ const entry = await getIndex("terms") as TermsEntry;
 ---
 
 <EntryLayout entry={entry} />
+=======
+---
+import EntryLayout from "@components/terms/EntryLayout.astro";
+import { getIndex } from "@lib/contentParser";
+import type { TermsEntry } from "@/types";
+
+const entry = await getIndex("terms") as TermsEntry;
+---
+
+<EntryLayout entry={entry} />
+>>>>>>> new-branch

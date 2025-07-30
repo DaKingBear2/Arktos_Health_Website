@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 User-agent: *
 Allow: /
 
 Disallow: /api/*
 
 Sitemap: https://www.arktoshealth.com/sitemap-index.xml
+=======
+User-agent: *
+Allow: /
+
+Disallow: /api/*
+
+Sitemap: https://www.arktoshealth.com/sitemap-index.xml
+>>>>>>> new-branch

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 import type { IndexCardsEntry } from "@/types";
 import BaseLayout from "@components/base/BaseLayout.astro";
@@ -14,3 +15,21 @@ const { title, description, cards } = entry.data;
 <BaseLayout title={title} description={description}>
   <Swiper {cards} client:load />
 </BaseLayout>
+=======
+---
+import type { IndexCardsEntry } from "@/types";
+import BaseLayout from "@components/base/BaseLayout.astro";
+import Swiper from "@components/index-cards/Swiper";
+
+interface Props {
+  entry: IndexCardsEntry;
+}
+
+const { entry } = Astro.props;
+const { title, description, cards } = entry.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <Swiper {cards} client:load />
+</BaseLayout>
+>>>>>>> new-branch

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { slugify } from "@lib/textConverter";
 
 const taxonomyFilter = (posts: any[], name: string, key: string) =>
@@ -6,3 +7,13 @@ const taxonomyFilter = (posts: any[], name: string, key: string) =>
   );
 
 export default taxonomyFilter;
+=======
+import { slugify } from "@lib/textConverter";
+
+const taxonomyFilter = (posts: any[], name: string, key: string) =>
+  posts.filter((post) =>
+    post.data[name].map((name: string) => slugify(name)).includes(key),
+  );
+
+export default taxonomyFilter;
+>>>>>>> new-branch

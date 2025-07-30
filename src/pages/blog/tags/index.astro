@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 import TaxaLayout from "@components/blog/TaxaLayout.astro";
 import { getTaxa, getTaxaMultiset } from "@lib/taxonomyParser";
@@ -9,3 +10,16 @@ const allTaxa = await getTaxaMultiset(collection, taxonomy);
 ---
 
 <TaxaLayout taxonomy={taxonomy} taxa={taxa} allTaxa={allTaxa} />
+=======
+---
+import TaxaLayout from "@components/blog/TaxaLayout.astro";
+import { getTaxa, getTaxaMultiset } from "@lib/taxonomyParser";
+
+const collection = "blog";
+const taxonomy = "tags";
+const taxa = await getTaxa(collection, taxonomy);
+const allTaxa = await getTaxaMultiset(collection, taxonomy);
+---
+
+<TaxaLayout taxonomy={taxonomy} taxa={taxa} allTaxa={allTaxa} />
+>>>>>>> new-branch

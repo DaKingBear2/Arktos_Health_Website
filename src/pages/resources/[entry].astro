@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 import type { RecipesEntry } from "@/types";
 import EntryLayout from "@components/recipes/EntryLayout.astro";
@@ -19,3 +20,26 @@ const { entry } = Astro.props;
 ---
 
 <EntryLayout entry={entry} />
+=======
+---
+import type { RecipesEntry } from "@/types";
+import EntryLayout from "@components/recipes/EntryLayout.astro";
+import { getEntries } from "@lib/contentParser";
+import { sortByTitle } from "@lib/sortFunctions";
+
+export async function getStaticPaths() {
+  const entries = await getEntries("recipes", sortByTitle) as RecipesEntry[];
+  const paths = entries.map((entry) => ({
+    params: {
+      entry: entry.id,
+    },
+    props: { entry },
+  }));
+  return paths;
+}
+
+const { entry } = Astro.props;
+---
+
+<EntryLayout entry={entry} />
+>>>>>>> new-branch
