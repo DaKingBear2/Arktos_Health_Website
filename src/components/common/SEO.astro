@@ -1,0 +1,49 @@
+---
+// Props for SEO
+const {
+  title = 'Arktos Health',
+  description = 'Arktos Health: Empowering wellness with the wisdom of the bear. Discover our resources, insights, and community.',
+  image = '/assets/Arktos-Star-logo.svg',
+  url = 'https://arktoshealth.com',
+  type = 'website',
+  twitter = '@arktoshealth',
+  alt = 'Arktos Health bear face logo',
+} = Astro.props;
+const siteName = 'Arktos Health';
+---
+<head>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={image} />
+  <meta property="og:image:alt" content={alt} />
+  <meta property="og:type" content={type} />
+  <meta property="og:url" content={url} />
+  <meta property="og:site_name" content={siteName} />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={image} />
+  <meta name="twitter:image:alt" content={alt} />
+  <meta name="twitter:site" content={twitter} />
+  <!-- JSON-LD Organization Schema -->
+  <script type="application/ld+json">
+    {JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: siteName,
+      url,
+      logo: image,
+      sameAs: [
+        'https://twitter.com/arktoshealth',
+        'https://facebook.com/arktoshealth',
+        'https://www.linkedin.com/company/arktoshealth/'
+      ]
+    })}
+  </script>
+</head> 
