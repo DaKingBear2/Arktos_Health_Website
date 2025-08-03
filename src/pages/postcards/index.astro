@@ -4,9 +4,9 @@ import SEO from "@components/common/SEO.astro";
 const response = await fetch('https://dog.ceo/api/breeds/image/random');
 const { message: dogImage } = await response.json();
 ---
-<BaseLayout title="Eva Town Guestbook">
-  <SEO title="Eva Town Guestbook" description="Leave a message in the Eva Town Guestbook!" />
-  <h1>Eva Town Guestbook</h1>
+<BaseLayout title="Postcards">
+  <SEO title="Postcards" description="Leave a message in the Postcards!" />
+  <h1>Postcards</h1>
   <p style="color: #b94a48; font-weight: bold;">Code names only. Sharing of identifiable information is prohibited when writing a postcard.</p>
   <img src={dogImage} alt="Random dog" style="max-width: 200px; border-radius: 12px; margin-bottom: 1rem;" />
   <form id="guestbook-form" style="margin-bottom: 2rem;">

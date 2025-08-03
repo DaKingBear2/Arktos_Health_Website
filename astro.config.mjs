@@ -35,6 +35,7 @@ export default defineConfig({
         dark: "dark-plus",
       } 
     },
-    extendDefaultPlugins: true
+    extendDefaultPlugins: true,
+    allowDangerousHtml: true
   },
 });
