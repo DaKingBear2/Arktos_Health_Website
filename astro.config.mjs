@@ -9,14 +9,18 @@ import remarkToc from "remark-toc";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
+import node from "@astrojs/node";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://Arktoshealth.com",
   base: "/",
   trailingSlash: "ignore",
+
   prefetch: {
     prefetchAll: true
   },
+
   integrations: [react(), sitemap(), tailwind({
     config: {
       applyBaseStyles: false
@@ -24,6 +28,7 @@ export default defineConfig({
   }), AutoImport({
     imports: ["@components/common/Button.astro", "@shortcodes/Accordion", "@shortcodes/Notice", "@shortcodes/Youtube", "@shortcodes/Tabs", "@shortcodes/Tab"]
   }), mdx()],
+
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, {
       test: "Table of contents"
@@ -38,4 +43,8 @@ export default defineConfig({
     extendDefaultPlugins: true,
     allowDangerousHtml: true
   },
+
+  adapter: node({
+    mode: "standalone",
+  }),
 });
