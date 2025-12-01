@@ -9,8 +9,8 @@
     "dev": "astro dev --host",
     "build": "astro build && node scripts/remove-sharp-chunk.js",
     "postbuild": "echo 'Build complete'",
-    "deploy": "npm run build && npx wrangler pages deploy dist --project-name=arktos-health-llc-website-2-0",
-    "pages:deploy": "npx wrangler pages deploy dist --project-name=arktos-health-llc-website-2-0",
+    "deploy": "npm run build && npx wrangler deploy",
+    "pages:deploy": "npx wrangler deploy",
     "format": "prettier -w ./src"
   },
   "dependencies": {
