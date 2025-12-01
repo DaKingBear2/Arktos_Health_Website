@@ -12,7 +12,8 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://Arktoshealth.com",
+  output: "server", // Enable SSR for Cloudflare Workers
+  site: "https://www.arktoshealth.com",
   base: "/",
   trailingSlash: "ignore",
 
@@ -48,4 +49,13 @@ export default defineConfig({
   adapter: cloudflare({
     imageService: "compile"
   }),
+
+  vite: {
+    ssr: {
+      external: ["sharp"]
+    },
+    optimizeDeps: {
+      exclude: ["sharp"]
+    }
+  }
 });

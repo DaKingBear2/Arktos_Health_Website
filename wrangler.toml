@@ -1,10 +1,17 @@
+# Worker name - update to match your existing worker if needed
+# Use: wrangler deploy --name arktos-health-llc-website (or your exact worker name)
 name = "arktos-health"
 main = "dist/_worker.js/index.js"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
-# Static assets are handled automatically by Astro Cloudflare adapter
-# No [site] section needed for Workers - adapter handles static assets
+# Build is handled by Astro, wrangler just deploys the pre-built files
+# Make sure to run 'npm run build' before deploying
+
+# Static assets directory - needed for Workers to serve static files
+[assets]
+binding = "ASSETS"
+directory = "./dist"
 
 # KV namespace for sessions (required by Cloudflare adapter)
 [[kv_namespaces]]
@@ -17,7 +24,9 @@ preview_id = "b0cda50d0f554903a3610a002e86e8a4"  # Using same ID for preview, or
 # [vars]
 # GITHUB_TOKEN = "your-token-here"
 
-# For production deployment
-[env.production]
-name = "arktos-health"
+# For production deployment (optional - remove if not needed)
+# If you need separate production config, uncomment and use: wrangler deploy --env production
+# [env.production]
+# name = "arktos-health"
+# main = "dist/_worker.js/index.js"
 
