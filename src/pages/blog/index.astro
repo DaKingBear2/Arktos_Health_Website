@@ -5,6 +5,8 @@ import { getEntries, getIndex } from "@lib/contentParser";
 import { sortByDate } from "@lib/sortFunctions";
 import type { BlogEntry } from "@/types";
 
+export const prerender = true;
+
 const { slug } = Astro.params;
 const currentPageIndex = slug && !isNaN(Number(slug)) ? Number(slug) : 1;
 

@@ -3,6 +3,8 @@ import { getIndex } from "@lib/contentParser";
 import EntryLayout from "@components/home/EntryLayout.astro";
 import type { HomeEntry } from "@/types";
 
+export const prerender = true;
+
 const entry = (await getIndex("home")) as HomeEntry;
 ---
 

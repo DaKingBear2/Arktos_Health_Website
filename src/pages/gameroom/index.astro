@@ -4,6 +4,8 @@ import { getIndex, getGroups } from "@lib/contentParser";
 import type { DocsEntry } from "@/types";
 import { sortByTitle } from "@lib/sortFunctions";
 
+export const prerender = true;
+
 const collectionIndex = (await getIndex("docs")) as DocsEntry;
 const groupIndices = (await getGroups("docs", sortByTitle)) as DocsEntry[];
 ---

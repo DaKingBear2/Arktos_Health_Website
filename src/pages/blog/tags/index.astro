@@ -2,6 +2,8 @@
 import TaxaLayout from "@components/blog/TaxaLayout.astro";
 import { getTaxa, getTaxaMultiset } from "@lib/taxonomyParser";
 
+export const prerender = true;
+
 const collection = "blog";
 const taxonomy = "tags";
 const taxa = await getTaxa(collection, taxonomy);

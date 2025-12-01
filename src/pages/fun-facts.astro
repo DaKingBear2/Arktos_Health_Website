@@ -3,6 +3,8 @@ import { getIndex } from "@lib/contentParser";
 import EntryLayout from "@components/index-cards/EntryLayout.astro";
 import type { IndexCardsEntry } from "@/types";
 
+export const prerender = true;
+
 const entry = (await getIndex("index-cards")) as IndexCardsEntry;
 ---
 
