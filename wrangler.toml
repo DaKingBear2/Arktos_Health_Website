@@ -1,6 +1,7 @@
 # Worker name - update to match your existing worker if needed
 # Use: wrangler deploy --name arktos-health-llc-website (or your exact worker name)
 name = "arktos-health"
+# Use absolute path resolution - wrangler will resolve this relative to wrangler.toml location
 main = "dist/_worker.js/index.js"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
