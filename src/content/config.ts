@@ -90,7 +90,7 @@ const home = defineCollection({
     }),
 });
 
-const indexCards = defineCollection({
+const index_cards = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
@@ -151,14 +151,20 @@ const terms = defineCollection({
   schema: searchable,
 });
 
+const contact = defineCollection({
+  type: "content",
+  schema: searchable,
+});
+
 // Export collections
 export const collections = {
   about,
   authors,
   blog,
+  contact,
   docs,
   home,
-  indexCards,
+  "index-cards": index_cards,
   poetry,
   portfolio,
   recipes,
