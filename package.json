@@ -11,6 +11,7 @@
     "postbuild": "node scripts/remove-sharp-chunk.js && pagefind --site dist",
     "deploy": "npm run build && npx wrangler deploy",
     "deploy:prod": "npm run build && npx wrangler deploy --env production",
+    "pages:deploy": "npx wrangler deploy",
     "format": "prettier -w ./src"
   },
   "dependencies": {
