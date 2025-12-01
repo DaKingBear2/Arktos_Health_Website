@@ -24,7 +24,7 @@ export async function getStaticPaths() {
   const pageCount = Math.ceil(entries.length / 6);
   const paths = [];
 
-  for (let i = 1; i < pageCount; i++) {
+  for (let i = 0; i < pageCount; i++) {
     paths.push({
       params: {
         slug: (i + 1).toString(),
