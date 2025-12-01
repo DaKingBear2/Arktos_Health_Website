@@ -5,6 +5,8 @@ import { slugify } from "@lib/textConverter";
 import { getEntries } from "@lib/contentParser";
 import { sortByDate } from "@lib/sortFunctions";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const entries = (await getEntries("authors")) as AuthorsEntry[];
   const paths = entries.map((entry) => ({

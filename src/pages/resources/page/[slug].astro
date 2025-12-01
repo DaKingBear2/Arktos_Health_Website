@@ -4,6 +4,8 @@ import { sortByDate } from "@lib/sortFunctions";
 import type { RecipesEntry } from "@/types";
 import CollectionLayout from "@components/recipes/CollectionLayout.astro";
 
+export const prerender = true;
+
 const entryIndex = (await getIndex("recipes")) as RecipesEntry;
 const entries = (await getEntries("recipes", sortByDate)) as RecipesEntry[];
 
