@@ -3,7 +3,12 @@ import type { APIRoute } from 'astro';
 export const prerender = false;
 
 // For GitHub API (Cloudflare Workers don't have file system access)
-const GITHUB_TOKEN = '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';
+// Get token from environment variable (set in Cloudflare Dashboard)
+// For local development, create a .env file with GITHUB_TOKEN=your_token
+const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
+if (!GITHUB_TOKEN) {
+  console.warn('GITHUB_TOKEN not set. Guestbook API may not work correctly.');
+}
 const GITHUB_REPO = 'DaKingBear2/Arktos_Health_Website';
 const GITHUB_FILEPATH = 'src/data/guestbook.json';
 const GITHUB_BRANCH = 'main';
@@ -13,8 +18,9 @@ export const GET: APIRoute = async () => {
     // Fetch from GitHub API instead of file system
     const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}?ref=${GITHUB_BRANCH}`, {
       headers: {
-        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Authorization': `Bearer ${GITHUB_TOKEN}`, // Updated to Bearer format (token format is deprecated)
         'Accept': 'application/vnd.github.v3+json',
+        'User-Agent': 'Arktos-Health-Website',
       },
     });
 
@@ -22,6 +28,12 @@ export const GET: APIRoute = async () => {
       // If file doesn't exist, return empty array
       if (response.status === 404) {
         return new Response(JSON.stringify([]), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      }
+      // Log more details for 401 errors
+      if (response.status === 401) {
+        console.error('GitHub API 401: Token may be invalid, expired, or missing permissions');
+        const errorText = await response.text();
+        console.error('GitHub API error response:', errorText);
       }
       throw new Error(`GitHub API error: ${response.status}`);
     }
@@ -51,8 +63,9 @@ export const POST: APIRoute = async ({ request }) => {
     try {
       const getResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}?ref=${GITHUB_BRANCH}`, {
         headers: {
-          'Authorization': `token ${GITHUB_TOKEN}`,
+          'Authorization': `Bearer ${GITHUB_TOKEN}`,
           'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'Arktos-Health-Website',
         },
       });
 
@@ -90,8 +103,9 @@ export const POST: APIRoute = async ({ request }) => {
       const commitRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}`, {
         method: 'PUT',
         headers: {
-          'Authorization': `token ${GITHUB_TOKEN}`,
+          'Authorization': `Bearer ${GITHUB_TOKEN}`,
           'Accept': 'application/vnd.github.v3+json',
+          'User-Agent': 'Arktos-Health-Website',
         },
         body: JSON.stringify({
           message: `Add guestbook entry by ${name}`,
