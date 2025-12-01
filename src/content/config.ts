@@ -1,5 +1,4 @@
 import { defineCollection, reference, z } from "astro:content";
-import { glob } from "astro/loaders";
 
 // May also need to update /src/types/index.d.ts when updating this file
 // When updating the set of searchable collections, update collectionList in /src/pages/search.astro
@@ -25,8 +24,9 @@ const social = z.object({
   bluesky: z.string().optional(),
 });
 
+// Using legacy content collection format (without glob loader) for Cloudflare compatibility
 const about = defineCollection({
-  loader: glob({ pattern: "-index.{md,mdx}", base: "./src/content/about" }),
+  type: "content",
   schema: ({ image }) =>
     searchable.extend({
       image: image().optional(),
@@ -35,10 +35,7 @@ const about = defineCollection({
 });
 
 const authors = defineCollection({
-  loader: glob({
-    pattern: "**\/[^_]*.{md,mdx}",
-    base: "./src/content/authors",
-  }),
+  type: "content",
   schema: ({ image }) =>
     searchable.extend({
       email: z.string().optional(),
@@ -49,7 +46,7 @@ const authors = defineCollection({
 });
 
 const blog = defineCollection({
-  loader: glob({ pattern: "**\/[^_]*.{md,mdx}", base: "./src/content/blog" }),
+  type: "content",
   schema: ({ image }) =>
     searchable.extend({
       date: z.date().optional(),
@@ -64,7 +61,7 @@ const blog = defineCollection({
 });
 
 const docs = defineCollection({
-  loader: glob({ pattern: "**\/[^_]*.{md,mdx}", base: "./src/content/docs" }),
+  type: "content",
   schema: ({ image }) =>
     searchable.extend({
       pubDate: z.date().optional(),
@@ -77,7 +74,7 @@ const docs = defineCollection({
 });
 
 const home = defineCollection({
-  loader: glob({ pattern: "-index.{md,mdx}", base: "./src/content/home" }),
+  type: "content",
   schema: ({ image }) =>
     z.object({
       image: image().optional(),
@@ -94,10 +91,7 @@ const home = defineCollection({
 });
 
 const indexCards = defineCollection({
-  loader: glob({
-    pattern: "-index.{md,mdx}",
-    base: "./src/content/index-cards",
-  }),
+  type: "content",
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -106,7 +100,7 @@ const indexCards = defineCollection({
 });
 
 const poetry = defineCollection({
-  loader: glob({ pattern: "**\/[^_]*.{md,mdx}", base: "./src/content/poetry" }),
+  type: "content",
   schema: ({ image }) =>
     searchable.extend({
       date: z.date().optional(),
@@ -117,10 +111,7 @@ const poetry = defineCollection({
 });
 
 const portfolio = defineCollection({
-  loader: glob({
-    pattern: "-index.{md,mdx}",
-    base: "./src/content/portfolio",
-  }),
+  type: "content",
   schema: searchable.extend({
     projects: z.array(
       z.object({
@@ -134,10 +125,7 @@ const portfolio = defineCollection({
 });
 
 const recipes = defineCollection({
-  loader: glob({
-    pattern: "**\/[^_]*.{md,mdx}",
-    base: "./src/content/recipes",
-  }),
+  type: "content",
   schema: ({ image }) =>
     searchable.extend({
       date: z.date().optional(),
@@ -159,7 +147,7 @@ const recipes = defineCollection({
 });
 
 const terms = defineCollection({
-  loader: glob({ pattern: "-index.{md,mdx}", base: "./src/content/terms" }),
+  type: "content",
   schema: searchable,
 });
 

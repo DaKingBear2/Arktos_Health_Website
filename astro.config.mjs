@@ -12,7 +12,7 @@ import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server", // Enable SSR for Cloudflare Workers
+  output: "server",
   site: "https://www.arktoshealth.com",
   base: "/",
   trailingSlash: "ignore",
@@ -44,16 +44,11 @@ export default defineConfig({
     allowDangerousHtml: true
   },
 
-  // Configure image service for Cloudflare Workers compatibility
-  // Sharp optimizes images at build time for prerendered pages
   adapter: cloudflare({
     imageService: "compile"
   }),
 
   vite: {
-    ssr: {
-      external: ["sharp"]
-    },
     optimizeDeps: {
       exclude: ["sharp"]
     }
