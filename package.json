@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro build",
-    "postbuild": "node scripts/remove-sharp-chunk.js && pagefind --site dist",
+    "postbuild": "node scripts/remove-sharp-chunk.js && pagefind --site dist && npm run build:verify",
+    "build:verify": "node scripts/verify-build.js",
     "deploy": "npm run build && npx wrangler deploy",
     "deploy:prod": "npm run build && npx wrangler deploy --env production",
     "pages:deploy": "node scripts/verify-and-deploy.js",
