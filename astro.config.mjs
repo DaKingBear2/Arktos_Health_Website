@@ -47,10 +47,7 @@ export default defineConfig({
   // Configure image service for Cloudflare Workers compatibility
   // Sharp optimizes images at build time for prerendered pages
   adapter: cloudflare({
-    imageService: "compile",
-    runtime: {
-      mode: "local"
-    }
+    imageService: "compile"
   }),
 
   vite: {
