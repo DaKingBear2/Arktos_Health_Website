@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro build && node scripts/remove-sharp-chunk.js && npm run build:verify",
-    "postbuild": "pagefind --site dist",
+    "postbuild": "echo 'Postbuild: Skipping pagefind for SSR build'",
     "build:verify": "node scripts/verify-build.js",
     "deploy": "npm run build && npx wrangler deploy",
     "deploy:prod": "npm run build && npx wrangler deploy --env production",
