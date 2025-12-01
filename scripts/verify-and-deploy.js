@@ -27,11 +27,12 @@ if (!fs.existsSync(wranglerTomlPath)) {
 
 console.log('✅ Build output found!');
 console.log('✅ wrangler.toml found!');
-console.log('Deploying to Cloudflare from:', projectRoot);
+console.log('Deploying to Cloudflare Pages from:', projectRoot);
 
 try {
-  // Ensure we run wrangler from the project root where wrangler.toml is located
-  execSync('npx wrangler deploy', { 
+  // Use 'wrangler pages deploy' for Cloudflare Pages (NOT 'wrangler deploy' which is for Workers)
+  // Astro Cloudflare adapter generates output for Pages, not Workers
+  execSync('npx wrangler pages deploy dist --project-name=arktos-health-llc-website-2-0', { 
     stdio: 'inherit', 
     cwd: projectRoot,
     env: { ...process.env, PWD: projectRoot }

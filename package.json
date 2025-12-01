@@ -10,8 +10,8 @@
     "build": "astro build && node scripts/remove-sharp-chunk.js && npm run build:verify",
     "postbuild": "echo 'Postbuild: Skipping pagefind for SSR build'",
     "build:verify": "node scripts/verify-build.js",
-    "deploy": "npm run build && npx wrangler deploy",
-    "deploy:prod": "npm run build && npx wrangler deploy --env production",
+    "deploy": "npm run build && npx wrangler pages deploy dist --project-name=arktos-health-llc-website-2-0",
+    "deploy:prod": "npm run build && npx wrangler pages deploy dist --project-name=arktos-health-llc-website-2-0",
     "pages:deploy": "node scripts/verify-and-deploy.js",
     "pages:build-deploy": "npm run build && node scripts/verify-and-deploy.js",
     "format": "prettier -w ./src"
