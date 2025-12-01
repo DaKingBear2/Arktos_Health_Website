@@ -8,47 +8,44 @@ import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
-
-import node from "@astrojs/node";
-import { defineConfig } from 'astro/config';
-import staticAdapter from '@astrojs/adapter-static';
-
-export default defineConfig({adapter: staticAdapter(),});
+import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
-//export default defineConfig({
-//  site: "https://Arktoshealth.com",
-//  base: "/",
-//  trailingSlash: "ignore",
+export default defineConfig({
+  site: "https://Arktoshealth.com",
+  base: "/",
+  trailingSlash: "ignore",
 
-//  prefetch: {
-//    prefetchAll: true
-//  },
+  prefetch: {
+    prefetchAll: true
+  },
 
-//  integrations: [react(), sitemap(), tailwind({
-//    config: {
-//      applyBaseStyles: false
-//    }
-//  }), AutoImport({
-//    imports: ["@components/common/Button.astro", "@shortcodes/Accordion", "@shortcodes/Notice", "@shortcodes/Youtube", "@shortcodes/Tabs", "@shortcodes/Tab"]
-//  }), mdx()],
+  integrations: [react(), sitemap(), tailwind({
+    config: {
+      applyBaseStyles: false
+    }
+  }), AutoImport({
+    imports: ["@components/common/Button.astro", "@shortcodes/Accordion", "@shortcodes/Notice", "@shortcodes/Youtube", "@shortcodes/Tabs", "@shortcodes/Tab"]
+  }), mdx()],
 
-//  markdown: {
-//    remarkPlugins: [remarkToc, [remarkCollapse, {
-//      test: "Table of contents"
-//    }], remarkMath],
-//    rehypePlugins: [[rehypeKatex, {}]],
-//    shikiConfig: {
-//      themes: { // https://shiki.style/themes
-//        light: "light-plus",
-//        dark: "dark-plus",
-//      } 
-//    },
-//    extendDefaultPlugins: true,
-//    allowDangerousHtml: true
-//  },
+  markdown: {
+    remarkPlugins: [remarkToc, [remarkCollapse, {
+      test: "Table of contents"
+    }], remarkMath],
+    rehypePlugins: [[rehypeKatex, {}]],
+    shikiConfig: {
+      themes: { // https://shiki.style/themes
+        light: "light-plus",
+        dark: "dark-plus",
+      } 
+    },
+    extendDefaultPlugins: true,
+    allowDangerousHtml: true
+  },
 
-//  adapter: node({
-//    mode: "standalone",
-//  }),
-//});
+  // Configure image service for Cloudflare Workers compatibility
+  // Sharp optimizes images at build time for prerendered pages
+  adapter: cloudflare({
+    imageService: "compile"
+  }),
+});

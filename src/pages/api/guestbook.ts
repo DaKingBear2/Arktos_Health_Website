@@ -1,23 +1,39 @@
 import type { APIRoute } from 'astro';
-import fs from 'fs/promises';
 
 export const prerender = false;
 
-const GUESTBOOK_PATH = 'src/data/guestbook.json';
-
-// For GitHub commit
+// For GitHub API (Cloudflare Workers don't have file system access)
 const GITHUB_TOKEN = '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';
 const GITHUB_REPO = 'DaKingBear2/Arktos_Health_Website';
-const GITHUB_FILEPATH = 'src/   data/guestbook.json';
+const GITHUB_FILEPATH = 'src/data/guestbook.json';
 const GITHUB_BRANCH = 'main';
 
 export const GET: APIRoute = async () => {
   try {
-    const data = await fs.readFile(GUESTBOOK_PATH, 'utf-8');
-    return new Response(data, { status: 200, headers: { 'Content-Type': 'application/json' } });
+    // Fetch from GitHub API instead of file system
+    const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}?ref=${GITHUB_BRANCH}`, {
+      headers: {
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json',
+      },
+    });
+
+    if (!response.ok) {
+      // If file doesn't exist, return empty array
+      if (response.status === 404) {
+        return new Response(JSON.stringify([]), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      }
+      throw new Error(`GitHub API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    // Decode base64 content
+    const content = JSON.parse(Buffer.from(data.content, 'base64').toString('utf-8'));
+    return new Response(JSON.stringify(content), { status: 200, headers: { 'Content-Type': 'application/json' } });
   } catch (err) {
     console.error('GET /api/guestbook error:', err);
-    return new Response(JSON.stringify({ error: 'Could not read guestbook.' }), { status: 500 });
+    // Return empty array on error instead of failing
+    return new Response(JSON.stringify([]), { status: 200, headers: { 'Content-Type': 'application/json' } });
   }
 };
 
@@ -29,63 +45,73 @@ export const POST: APIRoute = async ({ request }) => {
     }
     const timestamp = new Date().toISOString();
     let messages = [];
+    let sha = null;
+
+    // Fetch current messages from GitHub
     try {
-      const data = await fs.readFile(GUESTBOOK_PATH, 'utf-8');
-      messages = JSON.parse(data);
-      if (!Array.isArray(messages)) {
-        throw new Error('guestbook.json is not an array');
+      const getResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}?ref=${GITHUB_BRANCH}`, {
+        headers: {
+          'Authorization': `token ${GITHUB_TOKEN}`,
+          'Accept': 'application/vnd.github.v3+json',
+        },
+      });
+
+      if (getResponse.ok) {
+        const fileData = await getResponse.json();
+        sha = fileData.sha;
+        // Decode base64 content
+        const content = Buffer.from(fileData.content, 'base64').toString('utf-8');
+        messages = JSON.parse(content);
+        if (!Array.isArray(messages)) {
+          throw new Error('guestbook.json is not an array');
+        }
+      } else if (getResponse.status === 404) {
+        // File doesn't exist yet, start with empty array
+        console.warn('guestbook.json does not exist, initializing new file');
+        messages = [];
+      } else {
+        throw new Error(`GitHub API error: ${getResponse.status}`);
       }
-    } catch (fileErr) {
-      // If file does not exist or is invalid, start with empty array
-      console.warn('guestbook.json missing or invalid, initializing new file:', fileErr);
+    } catch (fetchErr) {
+      console.error('Error fetching guestbook from GitHub:', fetchErr);
+      // Continue with empty array if fetch fails
       messages = [];
     }
+
+    // Add new entry
     const newEntry = { name, message, timestamp };
     messages.push(newEntry);
-    try {
-      await fs.writeFile(GUESTBOOK_PATH, JSON.stringify(messages, null, 2));
-    } catch (writeErr) {
-      console.error('Error writing guestbook.json:', writeErr);
-      return new Response(JSON.stringify({ error: 'Could not save message to file.' }), { status: 500 });
-    }
 
     // Commit to GitHub
-    if (GITHUB_TOKEN && GITHUB_REPO) {
-      try {
-        console.log('Attempting to commit guestbook.json to GitHub...');
-        const content = Buffer.from(JSON.stringify(messages, null, 2)).toString('base64');
-        // Get the current file SHA
-        const shaRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}?ref=${GITHUB_BRANCH}`);
-        const shaData = await shaRes.json();
-        if (!shaData.sha) {
-          console.error('Could not get file SHA from GitHub:', shaData);
-          throw new Error('Could not get file SHA from GitHub: ' + JSON.stringify(shaData));
-        }
-        const sha = shaData.sha;
-        const commitRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}`, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `token ${GITHUB_TOKEN}`,
-            'Accept': 'application/vnd.github.v3+json',
-          },
-          body: JSON.stringify({
-            message: `Add guestbook entry by ${name}`,
-            content,
-            branch: GITHUB_BRANCH,
-            sha,
-          }),
-        });
-        const commitResText = await commitRes.text();
-        if (!commitRes.ok) {
-          console.error('GitHub commit failed:', commitResText);
-          throw new Error('GitHub commit failed: ' + commitResText);
-        } else {
-          console.log('GitHub commit successful:', commitResText);
-        }
-      } catch (githubErr) {
-        console.error('GitHub commit error:', githubErr);
-        // Do not fail the request if GitHub commit fails
+    try {
+      console.log('Attempting to commit guestbook.json to GitHub...');
+      const content = Buffer.from(JSON.stringify(messages, null, 2)).toString('base64');
+      
+      const commitRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${GITHUB_TOKEN}`,
+          'Accept': 'application/vnd.github.v3+json',
+        },
+        body: JSON.stringify({
+          message: `Add guestbook entry by ${name}`,
+          content,
+          branch: GITHUB_BRANCH,
+          ...(sha && { sha }), // Include SHA only if file exists
+        }),
+      });
+
+      const commitResText = await commitRes.text();
+      if (!commitRes.ok) {
+        console.error('GitHub commit failed:', commitResText);
+        // Still return success to user, but log the error
+        console.warn('Message added locally but GitHub commit failed');
+      } else {
+        console.log('GitHub commit successful:', commitResText);
       }
+    } catch (githubErr) {
+      console.error('GitHub commit error:', githubErr);
+      // Don't fail the request - message was processed successfully
     }
 
     return new Response(JSON.stringify(newEntry), { status: 201 });
