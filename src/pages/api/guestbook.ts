@@ -72,9 +72,21 @@ export const GET: APIRoute = async () => {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Check if GITHUB_TOKEN is set
+    if (!GITHUB_TOKEN) {
+      console.error('GITHUB_TOKEN is not set');
+      return new Response(JSON.stringify({ error: 'Server configuration error. Please contact administrator.' }), { 
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
     const { name, message } = await request.json();
     if (!name || !message) {
-      return new Response(JSON.stringify({ error: 'Name and message required.' }), { status: 400 });
+      return new Response(JSON.stringify({ error: 'Name and message required.' }), { 
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
     const timestamp = new Date().toISOString();
     let messages = [];
@@ -104,11 +116,13 @@ export const POST: APIRoute = async ({ request }) => {
         console.warn('guestbook.json does not exist, initializing new file');
         messages = [];
       } else {
+        const errorText = await getResponse.text();
+        console.error(`GitHub API error (${getResponse.status}):`, errorText);
         throw new Error(`GitHub API error: ${getResponse.status}`);
       }
     } catch (fetchErr) {
       console.error('Error fetching guestbook from GitHub:', fetchErr);
-      // Continue with empty array if fetch fails
+      // Continue with empty array if fetch fails (file might not exist yet)
       messages = [];
     }
 
@@ -116,42 +130,55 @@ export const POST: APIRoute = async ({ request }) => {
     const newEntry = { name, message, timestamp };
     messages.push(newEntry);
 
-    // Commit to GitHub
-    try {
-      console.log('Attempting to commit guestbook.json to GitHub...');
-      const content = base64Encode(JSON.stringify(messages, null, 2));
-      
-      const commitRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'User-Agent': 'Arktos-Health-Website',
-        },
-        body: JSON.stringify({
-          message: `Add guestbook entry by ${name}`,
-          content,
-          branch: GITHUB_BRANCH,
-          ...(sha && { sha }), // Include SHA only if file exists
-        }),
-      });
+    // Commit to GitHub - THIS MUST SUCCEED
+    console.log('Attempting to commit guestbook.json to GitHub...');
+    const content = base64Encode(JSON.stringify(messages, null, 2));
+    
+    const commitRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'User-Agent': 'Arktos-Health-Website',
+      },
+      body: JSON.stringify({
+        message: `Add guestbook entry by ${name}`,
+        content,
+        branch: GITHUB_BRANCH,
+        ...(sha && { sha }), // Include SHA only if file exists
+      }),
+    });
 
-      const commitResText = await commitRes.text();
-      if (!commitRes.ok) {
-        console.error('GitHub commit failed:', commitResText);
-        // Still return success to user, but log the error
-        console.warn('Message added locally but GitHub commit failed');
-      } else {
-        console.log('GitHub commit successful:', commitResText);
+    const commitResText = await commitRes.text();
+    if (!commitRes.ok) {
+      console.error('GitHub commit failed:', commitRes.status, commitResText);
+      let errorMessage = 'Failed to save message to GitHub.';
+      
+      // Provide more specific error messages
+      if (commitRes.status === 401) {
+        errorMessage = 'Authentication failed. Please contact administrator.';
+      } else if (commitRes.status === 403) {
+        errorMessage = 'Permission denied. Please contact administrator.';
+      } else if (commitRes.status === 422) {
+        errorMessage = 'File conflict. Please try again.';
       }
-    } catch (githubErr) {
-      console.error('GitHub commit error:', githubErr);
-      // Don't fail the request - message was processed successfully
+      
+      return new Response(JSON.stringify({ error: errorMessage }), { 
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
-    return new Response(JSON.stringify(newEntry), { status: 201 });
+    console.log('GitHub commit successful');
+    return new Response(JSON.stringify(newEntry), { 
+      status: 201,
+      headers: { 'Content-Type': 'application/json' }
+    });
   } catch (err) {
     console.error('POST /api/guestbook error:', err);
-    return new Response(JSON.stringify({ error: 'Could not save message.' }), { status: 500 });
+    return new Response(JSON.stringify({ error: 'Could not save message.' }), { 
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 }; 

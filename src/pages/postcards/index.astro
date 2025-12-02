@@ -26,15 +26,43 @@ const { message: dogImage } = await response.json();
   </div>
   <script type="module" client:load>
     async function fetchMessages() {
-      const res = await fetch('/api/guestbook');
-      const messages = await res.json();
-      const ul = document.getElementById('messages-list');
-      ul.innerHTML = '';
-      messages.reverse().forEach(entry => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${entry.name}:</strong> ${entry.message} <span style='color:#888;font-size:0.8em;'>(${new Date(entry.timestamp).toLocaleString()})</span>`;
-        ul.appendChild(li);
-      });
+      try {
+        const ul = document.getElementById('messages-list');
+        if (!ul) return;
+        
+        const res = await fetch('/api/guestbook');
+        if (!res.ok) {
+          console.error('Failed to fetch messages:', res.status);
+          ul.innerHTML = '<li style="color: #b94a48;">Failed to load messages. Please refresh the page.</li>';
+          return;
+        }
+        
+        const messages = await res.json();
+        ul.innerHTML = '';
+        
+        if (!Array.isArray(messages)) {
+          console.error('Invalid messages format:', messages);
+          ul.innerHTML = '<li style="color: #b94a48;">Invalid data format.</li>';
+          return;
+        }
+        
+        if (messages.length === 0) {
+          ul.innerHTML = '<li style="color: #888; font-style: italic;">No messages yet. Be the first to post!</li>';
+          return;
+        }
+        
+        messages.reverse().forEach(entry => {
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${entry.name}:</strong> ${entry.message} <span style='color:#888;font-size:0.8em;'>(${new Date(entry.timestamp).toLocaleString()})</span>`;
+          ul.appendChild(li);
+        });
+      } catch (error) {
+        console.error('Error fetching messages:', error);
+        const ul = document.getElementById('messages-list');
+        if (ul) {
+          ul.innerHTML = '<li style="color: #b94a48;">Error loading messages. Please refresh the page.</li>';
+        }
+      }
     }
     fetchMessages();
     document.getElementById('guestbook-form').onsubmit = async (e) => {
@@ -42,27 +70,53 @@ const { message: dogImage } = await response.json();
       const name = document.getElementById('name').value;
       const message = document.getElementById('message').value;
       const statusDiv = document.getElementById('guestbook-status');
+      const submitButton = e.target.querySelector('button[type="submit"]');
+      
       statusDiv.textContent = '';
-      if (!message) return;
+      if (!message) {
+        statusDiv.style.color = '#b94a48';
+        statusDiv.textContent = 'Please enter a message.';
+        return;
+      }
+      
+      // Disable button during submission
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Posting...';
+      }
+      
       try {
         const res = await fetch('/api/guestbook', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, message })
         });
+        
+        const data = await res.json();
+        
         if (res.ok) {
           statusDiv.style.color = '#31708f';
-          statusDiv.textContent = 'Message posted!';
+          statusDiv.textContent = 'Message posted successfully!';
           document.getElementById('message').value = '';
-          fetchMessages();
+          // Refresh messages after a short delay to ensure GitHub has processed
+          setTimeout(() => {
+            fetchMessages();
+          }, 1000);
         } else {
-          const err = await res.json();
           statusDiv.style.color = '#b94a48';
-          statusDiv.textContent = err.error || 'Failed to post message.';
+          statusDiv.textContent = data.error || `Failed to post message (${res.status}).`;
+          console.error('Post failed:', data);
         }
       } catch (error) {
         statusDiv.style.color = '#b94a48';
-        statusDiv.textContent = 'Network error. Please try again.';
+        statusDiv.textContent = 'Network error. Please check your connection and try again.';
+        console.error('Network error:', error);
+      } finally {
+        // Re-enable button
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Post to Guestbook';
+        }
       }
     };
     // Regenerate random name on page load
