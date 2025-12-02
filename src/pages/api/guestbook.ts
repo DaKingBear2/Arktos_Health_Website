@@ -13,6 +13,27 @@ const GITHUB_REPO = 'DaKingBear2/Arktos_Health_Website';
 const GITHUB_FILEPATH = 'src/data/guestbook.json';
 const GITHUB_BRANCH = 'main';
 
+// Helper functions for base64 encoding/decoding on Cloudflare Workers
+function base64Decode(base64: string): string {
+  // Decode base64 to binary string, then convert to UTF-8
+  const binaryString = atob(base64);
+  const bytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return new TextDecoder('utf-8').decode(bytes);
+}
+
+function base64Encode(text: string): string {
+  // Convert UTF-8 string to bytes, then encode to base64
+  const bytes = new TextEncoder().encode(text);
+  let binaryString = '';
+  for (let i = 0; i < bytes.length; i++) {
+    binaryString += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binaryString);
+}
+
 export const GET: APIRoute = async () => {
   try {
     // Fetch from GitHub API instead of file system
@@ -40,7 +61,7 @@ export const GET: APIRoute = async () => {
 
     const data = await response.json();
     // Decode base64 content
-    const content = JSON.parse(Buffer.from(data.content, 'base64').toString('utf-8'));
+    const content = JSON.parse(base64Decode(data.content));
     return new Response(JSON.stringify(content), { status: 200, headers: { 'Content-Type': 'application/json' } });
   } catch (err) {
     console.error('GET /api/guestbook error:', err);
@@ -73,7 +94,7 @@ export const POST: APIRoute = async ({ request }) => {
         const fileData = await getResponse.json();
         sha = fileData.sha;
         // Decode base64 content
-        const content = Buffer.from(fileData.content, 'base64').toString('utf-8');
+        const content = base64Decode(fileData.content);
         messages = JSON.parse(content);
         if (!Array.isArray(messages)) {
           throw new Error('guestbook.json is not an array');
@@ -98,7 +119,7 @@ export const POST: APIRoute = async ({ request }) => {
     // Commit to GitHub
     try {
       console.log('Attempting to commit guestbook.json to GitHub...');
-      const content = Buffer.from(JSON.stringify(messages, null, 2)).toString('base64');
+      const content = base64Encode(JSON.stringify(messages, null, 2));
       
       const commitRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}`, {
         method: 'PUT',
