@@ -5,13 +5,40 @@ export const prerender = false;
 // For GitHub API (Cloudflare Workers don't have file system access)
 // Get token from environment variable (set in Cloudflare Dashboard)
 // For local development, create a .env file with GITHUB_TOKEN=your_token
-const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
-if (!GITHUB_TOKEN) {
-  console.warn('GITHUB_TOKEN not set. Guestbook API may not work correctly.');
-}
 const GITHUB_REPO = 'DaKingBear2/Arktos_Health_Website';
 const GITHUB_FILEPATH = 'src/data/guestbook.json';
 const GITHUB_BRANCH = 'main';
+
+// Helper function to get GITHUB_TOKEN from runtime environment
+function getGitHubToken(locals?: any): string | undefined {
+  // Try runtime env first (Cloudflare Workers/Pages)
+  // In Astro with Cloudflare adapter, env vars are at locals.runtime.env
+  if (locals?.runtime?.env?.GITHUB_TOKEN) {
+    const token = locals.runtime.env.GITHUB_TOKEN;
+    return typeof token === 'string' ? token : String(token);
+  }
+  
+  // Also try direct access (some versions of the adapter)
+  if (locals?.runtime?.env && typeof locals.runtime.env.GITHUB_TOKEN !== 'undefined') {
+    const token = locals.runtime.env.GITHUB_TOKEN;
+    return typeof token === 'string' ? token : String(token);
+  }
+  
+  // Fallback to import.meta.env for local development
+  const metaEnvToken = import.meta.env.GITHUB_TOKEN;
+  if (metaEnvToken) {
+    return typeof metaEnvToken === 'string' ? metaEnvToken : String(metaEnvToken);
+  }
+  
+  // Log for debugging
+  console.warn('GITHUB_TOKEN not found in runtime env or import.meta.env');
+  console.warn('Locals structure:', JSON.stringify(Object.keys(locals || {})));
+  if (locals?.runtime) {
+    console.warn('Runtime keys:', JSON.stringify(Object.keys(locals.runtime || {})));
+  }
+  
+  return undefined;
+}
 
 // Helper functions for base64 encoding/decoding on Cloudflare Workers
 function base64Decode(base64: string): string {
@@ -34,8 +61,10 @@ function base64Encode(text: string): string {
   return btoa(binaryString);
 }
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async (context) => {
   try {
+    const GITHUB_TOKEN = getGitHubToken(context.locals);
+    
     // Fetch from GitHub API instead of file system
     const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}?ref=${GITHUB_BRANCH}`, {
       headers: {
@@ -70,8 +99,10 @@ export const GET: APIRoute = async () => {
   }
 };
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
+    const GITHUB_TOKEN = getGitHubToken(locals);
+    
     // Check if GITHUB_TOKEN is set
     if (!GITHUB_TOKEN) {
       console.error('GITHUB_TOKEN is not set');
