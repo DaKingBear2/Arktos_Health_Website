@@ -65,6 +65,16 @@ export const GET: APIRoute = async (context) => {
   try {
     const GITHUB_TOKEN = getGitHubToken(context.locals);
     
+    // Check if GITHUB_TOKEN is set
+    if (!GITHUB_TOKEN) {
+      console.error('GET /api/guestbook: GITHUB_TOKEN is not set');
+      // Return empty array when token is missing (graceful degradation)
+      return new Response(JSON.stringify([]), { 
+        status: 200, 
+        headers: { 'Content-Type': 'application/json' } 
+      });
+    }
+    
     // Fetch from GitHub API instead of file system
     const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILEPATH}?ref=${GITHUB_BRANCH}`, {
       headers: {
