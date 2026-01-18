@@ -19,6 +19,7 @@ interface Props {
 const { entry } = Astro.props;
 const {
   title,
+  header,
   author,
   description,
   image,
@@ -29,6 +30,7 @@ const {
   ingredients,
   instructions,
   notes,
+  link
 } = entry.data;
 ---
 
@@ -38,7 +40,7 @@ const {
       <div class="row justify-center">
         <article class="lg:col-10 flex flex-wrap content-start">
           <!-- Title -->
-          <h1 set:html={title} class="p-2 col basis-full min-w-72" />
+          <h1 set:html={header || title} class="p-2 col basis-full min-w-72" />
           <!-- Cover Photo -->
           {
             image && (
@@ -112,6 +114,23 @@ const {
               }
             </div>
           </section>
+
+          <!-- Link -->
+          {
+            link && (
+              <section class="col basis-full p-2 min-w-72">
+                <div class="glass rounded-lg p-4 intersect:animate-fadeUp opacity-0">
+                  <div class="row justify-center">
+                      <div class="row my-1">
+                        <div class="col">Please visit their website at: <a href={link} target="_blank">{link}</a></div>
+                        <hr class="my-1" />
+                      </div>
+                  </div>
+                </div>
+              </section>
+            )
+          }
+
           <!-- Ingredients -->
           {
             ingredients && (

@@ -10,7 +10,12 @@ import {
 } from "react-icons/fa";
 
 type Props = {
-  cards: string[];
+  cards: {
+    header: string;
+    subText?: string;
+    image?: string;
+    link?: string;
+  }[];
 };
 
 const getTodayIndex = () => {
@@ -56,7 +61,15 @@ const ConversationSwiper = ({ cards }: Props) => {
         {cards.map((card, index) => (
           <SwiperSlide key={index}>
             <div className="col-10 sm:col-8 md:col-6 mx-auto p-4 my-12 min-h-64 text-center content-center glass rounded-lg">
-              <h3>{card}</h3>
+              <h3 className="pb-4">{card.header}</h3>
+              {card.subText ? card.link ? <a href={card.link} target="_blank"><p>{card.subText}</p></a> : <p>{card.subText}</p>: null}
+              { card.image && (
+                <div className="col basis-2/3 p-2 min-w-72">
+                  <div className="glass rounded-lg intersect:animate-fadeDown opacity-0">
+                    <img className="w-full rounded-lg" src={card.image} alt={card.header} width={1920} height={1080}></img>
+                  </div>
+                </div>
+              )}
             </div>
           </SwiperSlide>
         ))}

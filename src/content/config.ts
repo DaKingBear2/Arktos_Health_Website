@@ -5,6 +5,7 @@ import { defineCollection, reference, z } from "astro:content";
 
 const searchable = z.object({
   title: z.string(),
+  header: z.string().optional(),
   description: z.string().optional(),
   autodescription: z.boolean().default(true),
   draft: z.boolean().default(false),
@@ -95,7 +96,14 @@ const index_cards = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    cards: z.array(z.string()),
+    cards: z.array(
+      z.object({
+        header: z.string(),
+        subText: z.string().optional(),
+        image: z.string().optional(),
+        link: z.string().optional(),
+      })
+    ),
   }),
 });
 
@@ -143,6 +151,7 @@ const recipes = defineCollection({
         .optional(),
       instructions: z.array(z.string()).optional(),
       notes: z.array(z.string()).optional(),
+      link: z.string().optional(),
     }),
 });
 
