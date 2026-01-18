@@ -62,11 +62,23 @@ const ConversationSwiper = ({ cards }: Props) => {
           <SwiperSlide key={index}>
             <div className="col-10 sm:col-8 md:col-6 mx-auto p-4 my-12 min-h-64 text-center content-center glass rounded-lg">
               <h3 className="pb-4">{card.header}</h3>
-              {card.subText ? card.link ? <a href={card.link} target="_blank"><p>{card.subText}</p></a> : <p>{card.subText}</p>: null}
-              { card.image && (
-                <div className="col basis-2/3 p-2 min-w-72">
-                  <div className="glass rounded-lg intersect:animate-fadeDown opacity-0">
-                    <img className="w-full rounded-lg" src={card.image} alt={card.header} width={1920} height={1080}></img>
+              {card.subText &&
+                (card.link ? (
+                  <a href={card.link} target="_blank" rel="noopener noreferrer">
+                    <p>{card.subText}</p>
+                  </a>
+                ) : (
+                  <p>{card.subText}</p>
+                ))}
+
+              {card.image && (
+                <div className="w-full p-2">
+                  <div className="glass rounded-lg overflow-hidden intersect:animate-fadeDown opacity-0">
+                    <img
+                      src={card.image}
+                      alt={card.header}
+                      className="w-full h-auto rounded-lg object-contain sm:object-cover"
+                    />
                   </div>
                 </div>
               )}
