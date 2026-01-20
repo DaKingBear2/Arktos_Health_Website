@@ -1,11 +1,11 @@
 ---
-title: John Smith
-email: johndoe@email.com
+title: John S.
+email: info@arktoshealth.com
 image: "@assets/profile/john-doe.jpg"
-description: This is the description. Just an example of a description, which is bad. A most not good description indeed, but characters on the page.
+description: John Smith is a caring and dedicated mental health provider serving their community with excellence and compassion. 
 social:
   facebook: "https://www.facebook.com/"
   instagram: "https://www.instagram.com/"
   youtube: "https://www.youtube.com/"
 ---
-Licensed Psychotherapist
+Psychotherapist
